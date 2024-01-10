@@ -1,45 +1,28 @@
 The ``0-add_integer`` module
-=================================
+=============================
 
-#!/usr/bin/python3
-"""Test cases for the add_integer function."""
+# Test cases for the add_integer function
 
-class TestAddIntegerFunction:
+print("Test 1: Normal addition")
+result = add_integer(3, 5)
+print("Result: {}".format(result))  # Expected output: 8
 
-    def __init__(self):
-        self.run_tests()
+print("\nTest 2: Addition with default value for b")
+result = add_integer(10)
+print("Result: {}".format(result))  # Expected output: 108
 
-    def assert_equal(self, result, expected):
-        assert result == expected, f"Expected {expected}, but got {result}"
+print("\nTest 3: Addition with floats (should be cast to integers)")
+result = add_integer(4.5, 3.2)
+print("Result: {}".format(result))  # Expected output: 7
 
-    def test_add_integer_with_integers(self):
-        result = add_integer(3, 5)
-        self.assert_equal(result, 8)
+print("\nTest 4: Raise TypeError for invalid type of a")
+try:
+   result = add_integer("hello", 5)
+except TypeError as e:
+   print("Error: {}".format(e))  # Expected output: a must be an integer or a float
 
-    def test_add_integer_with_floats(self):
-        result = add_integer(3.5, 5.5)
-        self.assert_equal(result, 8)
-
-    def test_add_integer_with_mixed_types(self):
-        result = add_integer(3, 5.5)
-        self.assert_equal(result, 8)
-
-    def test_add_integer_with_default_value(self):
-        result = add_integer(3)
-        self.assert_equal(result, 101)
-
-    def test_add_integer_with_non_numeric_a(self):
-        try:
-            add_integer("3", 5)
-        except TypeError as e:
-            assert str(e) == "a must be an integer or a float", f"Unexpected error message: {e}"
-
-    def test_add_integer_with_non_numeric_b(self):
-        try:
-            add_integer(3, "5")
-        except TypeError as e:
-            assert str(e) == "b must be an integer or a float", f"Unexpected error message: {e}"
-
-# Create an instance of the test class to run the tests
-TestAddIntegerFunction()
-
+print("\nTest 5: Raise TypeError for invalid type of b")
+try:
+   result = add_integer(5, "world")
+except TypeError as e:
+   print("Error: {}".format(e))  # Expected output: b must be an integer or a float
